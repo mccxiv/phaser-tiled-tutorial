@@ -7,8 +7,8 @@ Tiled.Preload = {
 
 		this.load.setPreloadSprite(this.preloadBar);
 
-		this.load.tilemap('castle', 'my-assets/map.json', null, Phaser.Tilemap.TILED_JSON);
-		this.load.image('gameTiles', 'original/assets/images/tiles.png');
+		this.load.tilemap('castle', 'my-assets/map-2.json', null, Phaser.Tilemap.TILED_JSON);
+		this.load.image('gameTiles', 'my-assets/tilesheet.png');
 		this.load.image('player', 'original/assets/images/player.png');
 		this.load.image('goldenapple', 'my-assets/goldenapple.png');
 	},

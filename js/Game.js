@@ -3,17 +3,34 @@ var Tiled = Tiled || {};
 Tiled.Game = {
 	create: function() {
 		this.map = this.game.add.tilemap('castle');
-		this.map.addTilesetImage('tiles', 'gameTiles');
+		this.map.addTilesetImage('tilesheet', 'gameTiles');
 
-		this.backgroundlayer = this.map.createLayer('backgroundLayer');
-		this.blockedLayer = this.map.createLayer('blockedLayer');
+		window.z = this;
 
-		this.map.setCollisionBetween(1, 2000, true, 'blockedLayer');
-		this.backgroundlayer.resizeWorld();
+		this.tileLayers = [];
+		this.tileLayers.push(this.map.createLayer('base'));
+		this.tileLayers.push(this.map.createLayer('desert'));
+		this.tileLayers.push(this.map.createLayer('dirt'));
+		this.tileLayers.push(this.map.createLayer('savannah'));
+		this.tileLayers.push(this.map.createLayer('grass'));
+		this.tileLayers.push(this.map.createLayer('cobblestone'));
+		this.tileLayers.push(this.map.createLayer('lakes'));
+		this.tileLayers.push(this.map.createLayer('lakes2'));
+		this.tileLayers.push(this.map.createLayer('bridge'));
+		this.tileLayers.push(this.map.createLayer('fences'));
+		this.tileLayers.push(this.map.createLayer('props'));
+		this.tileLayers.push(this.map.createLayer('props2'));
+		this.tileLayers.push(this.map.createLayer('trees1'));
+		this.tileLayers.push(this.map.createLayer('trees2'));
+		this.tileLayers.push(this.map.createLayer('houses'));
+		this.blockedLayer = this.map.createLayer('collision');
+
+		this.map.setCollisionBetween(1, 2000, true, 'collision');
+		this.tileLayers[0].resizeWorld();
 
 		this.createItems();
 
-		var playerStart = this.findObjectsByType('playerStart', this.map, 'objectLayer')[0];
+		var playerStart = this.findObjectsByType('player', this.map, 'objects')[0];
 
 		this.player = this.game.add.sprite(playerStart.x, playerStart.y, 'player');
 
@@ -49,7 +66,7 @@ Tiled.Game = {
 		this.items.enableBody = true;
 
 		var item;
-		this.findObjectsByType('item', this.map, 'objectLayer').forEach(function(element) {
+		this.findObjectsByType('item', this.map, 'objects').forEach(function(element) {
 			this.createFromTiledObject(element, this.items);
 		}.bind(this));
 	},
